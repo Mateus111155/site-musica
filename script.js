@@ -61,6 +61,7 @@ const tempo = document.getElementById("tempo");
 
 const volume = document.getElementById("volume");
 
+const pesquisa = document.getElementById("pesquisa");
 
 // ==============================
 // CARREGAR MÚSICA
@@ -292,3 +293,36 @@ botoesMusica.forEach(function(botao) {
 // ==============================
 
 carregarMusica();
+
+pesquisa.addEventListener("input", function() {
+
+    const texto = pesquisa.value.toLowerCase();
+
+    botoesMusica.forEach(function(botao) {
+
+        const numero = Number(botao.dataset.musica);
+
+        const musicaEncontrada = musicas[numero];
+
+        const nome =
+            musicaEncontrada.titulo.toLowerCase();
+
+        const artistaNome =
+            musicaEncontrada.artista.toLowerCase();
+
+        if (
+            nome.includes(texto) ||
+            artistaNome.includes(texto)
+        ) {
+
+            botao.style.display = "block";
+
+        } else {
+
+            botao.style.display = "none";
+
+        }
+
+    });
+
+});

@@ -19,12 +19,20 @@
 
     <div class="container">
 
+        <!-- ================================= -->
+        <!-- TÍTULO -->
+        <!-- ================================= -->
+
         <h1>🎵 Meu Player</h1>
 
 
+        <!-- ================================= -->
         <!-- PLAYER -->
+        <!-- ================================= -->
 
         <div class="player">
+
+            <!-- CAPA -->
 
             <img
                 id="capa"
@@ -32,14 +40,22 @@
                 alt="Capa da música"
             >
 
+
+            <!-- TÍTULO DA MÚSICA -->
+
             <h2 id="titulo">
                 Música 1
             </h2>
+
+
+            <!-- ARTISTA -->
 
             <p id="artista">
                 Artista 1
             </p>
 
+
+            <!-- ÁUDIO -->
 
             <audio id="musica"></audio>
 
@@ -67,27 +83,34 @@
             </div>
 
 
-            <!-- PROGRESSO -->
+            <!-- ================================= -->
+            <!-- BARRA DE PROGRESSO -->
+            <!-- ================================= -->
 
             <input
                 type="range"
                 id="progresso"
-                value="0"
                 min="0"
                 max="100"
+                value="0"
             >
 
+
+            <!-- TEMPO -->
 
             <p id="tempo">
                 0:00 / 0:00
             </p>
 
 
+            <!-- ================================= -->
             <!-- VOLUME -->
+            <!-- ================================= -->
 
             <label for="volume">
                 🔊 Volume
             </label>
+
 
             <input
                 type="range"
@@ -101,30 +124,51 @@
         </div>
 
 
+        <!-- ================================= -->
         <!-- PLAYLIST -->
+        <!-- ================================= -->
 
         <div class="lista">
 
-            <h2>🎶 Playlist</h2>
+            <h2>
+                🎶 Playlist
+            </h2>
 
+
+            <!-- PESQUISA -->
 
             <input
                 type="text"
                 id="pesquisa"
-                placeholder="🔎 Procurar música..."
+                placeholder="🔎 Procurar música ou artista..."
             >
 
+
+            <!--
+                O JAVASCRIPT VAI CRIAR
+                AS MÚSICAS AQUI
+            -->
 
             <div id="lista-musicas"></div>
 
         </div>
 
 
+        <!-- ================================= -->
         <!-- FAVORITOS -->
+        <!-- ================================= -->
 
         <div class="lista favoritos-box">
 
-            <h2>❤️ Minhas Favoritas</h2>
+            <h2>
+                ❤️ Minhas Favoritas
+            </h2>
+
+
+            <!--
+                O JAVASCRIPT VAI CRIAR
+                OS FAVORITOS AQUI
+            -->
 
             <div id="lista-favoritos"></div>
 
@@ -132,6 +176,10 @@
 
     </div>
 
+
+    <!-- ================================= -->
+    <!-- JAVASCRIPT -->
+    <!-- ================================= -->
 
     <script src="script.js"></script>
 

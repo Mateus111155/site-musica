@@ -12,63 +12,73 @@
 
 <body>
 
-    <h1>🎵 Meu Site de Música</h1>
+    <div class="container">
 
-    <div class="player">
+        <h1>🎵 Meu Player</h1>
 
-        <h2 id="titulo">Minha Música</h2>
+        <div class="player">
 
-        <audio id="musica"></audio>
+            <img id="capa" src="capa1.jpg" alt="Capa da música">
 
-        <button id="anterior">⏮️</button>
+            <h2 id="titulo">Música 1</h2>
 
-        <button id="play">▶️</button>
+            <p id="artista">Artista 1</p>
 
-        <button id="pause">⏸️</button>
+            <audio id="musica"></audio>
 
-        <button id="proxima">⏭️</button>
+            <div class="controles">
 
-        <br><br>
+                <button id="anterior">⏮️</button>
 
-        <input
-            type="range"
-            id="progresso"
-            value="0"
-            min="0"
-            max="100"
-        >
+                <button id="play">▶️</button>
 
-        <p id="tempo">0:00 / 0:00</p>
+                <button id="pause">⏸️</button>
 
-        <label>🔊 Volume</label>
+                <button id="proxima">⏭️</button>
 
-        <input
-            type="range"
-            id="volume"
-            min="0"
-            max="1"
-            step="0.01"
-            value="1"
-        >
+            </div>
 
-    </div>
+            <input
+                type="range"
+                id="progresso"
+                value="0"
+                min="0"
+                max="100"
+            >
+
+            <p id="tempo">0:00 / 0:00</p>
+
+            <label>🔊 Volume</label>
+
+            <input
+                type="range"
+                id="volume"
+                min="0"
+                max="1"
+                step="0.01"
+                value="1"
+            >
+
+        </div>
 
 
-    <div class="lista">
+        <div class="lista">
 
-        <h2>🎶 Minhas músicas</h2>
+            <h2>🎶 Playlist</h2>
 
-        <button class="musica-item" data-musica="0">
-            🎵 Música 1
-        </button>
+            <button class="musica-item" data-musica="0">
+                🎵 Música 1
+            </button>
 
-        <button class="musica-item" data-musica="1">
-            🎵 Música 2
-        </button>
+            <button class="musica-item" data-musica="1">
+                🎵 Música 2
+            </button>
 
-        <button class="musica-item" data-musica="2">
-            🎵 Música 3
-        </button>
+            <button class="musica-item" data-musica="2">
+                🎵 Música 3
+            </button>
+
+        </div>
 
     </div>
 

@@ -111,3 +111,16 @@ input[type="range"] {
     margin: 0;
     font-size: 20px;
 }
+.favoritos-box {
+    margin-top: 25px;
+}
+
+.favoritos-box p {
+    text-align: center;
+    color: #aaa;
+}
+
+.favoritos-box .musica-item {
+    width: 100%;
+    margin: 8px 0;
+}

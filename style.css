@@ -398,3 +398,15 @@ h1 {
 
 }
 ```
+/* ==========================================
+   MÚSICA TOCANDO
+   ========================================== */
+
+.musica-linha.tocando {
+    transform: scale(1.02);
+}
+
+.musica-linha.tocando .musica-item {
+    background: #555;
+    font-weight: bold;
+}

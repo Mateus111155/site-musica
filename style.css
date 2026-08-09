@@ -479,3 +479,62 @@ main {
 
 }
 ```
+
+/* ==========================================
+   ÁLBUNS
+   ========================================== */
+
+#lista-albuns {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 15px;
+
+}
+
+
+.album {
+
+    background: #333;
+
+    padding: 10px;
+
+    border-radius: 15px;
+
+    cursor: pointer;
+
+    text-align: center;
+
+}
+
+
+.album:hover {
+
+    transform: scale(1.03);
+
+}
+
+
+.album img {
+
+    width: 100%;
+
+    aspect-ratio: 1 / 1;
+
+    object-fit: cover;
+
+    border-radius: 10px;
+
+    margin-bottom: 10px;
+
+}
+
+
+.album h3 {
+
+    font-size: 16px;
+
+}

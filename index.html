@@ -1,14 +1,19 @@
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Meu Site de Música</title>
 
     <link rel="stylesheet" href="style.css">
+
 </head>
+
 
 <body>
 
@@ -16,27 +21,63 @@
 
         <h1>🎵 Meu Player</h1>
 
+
+        <!-- PLAYER -->
+
         <div class="player">
 
-            <img id="capa" src="capa1.jpg" alt="Capa da música">
+            <!-- CAPA DA MÚSICA -->
 
-            <h2 id="titulo">Música 1</h2>
+            <img
+                id="capa"
+                src="capa1.jpg"
+                alt="Capa da música"
+            >
 
-            <p id="artista">Artista 1</p>
+
+            <!-- NOME DA MÚSICA -->
+
+            <h2 id="titulo">
+                Música 1
+            </h2>
+
+
+            <!-- NOME DO ARTISTA -->
+
+            <p id="artista">
+                Artista 1
+            </p>
+
+
+            <!-- ÁUDIO -->
 
             <audio id="musica"></audio>
 
+
+            <!-- CONTROLES -->
+
             <div class="controles">
 
-                <button id="anterior">⏮️</button>
+                <button id="anterior">
+                    ⏮️
+                </button>
 
-                <button id="play">▶️</button>
+                <button id="play">
+                    ▶️
+                </button>
 
-                <button id="pause">⏸️</button>
+                <button id="pause">
+                    ⏸️
+                </button>
 
-                <button id="proxima">⏭️</button>
+                <button id="proxima">
+                    ⏭️
+                </button>
 
             </div>
+
+
+            <!-- BARRA DE PROGRESSO -->
 
             <input
                 type="range"
@@ -46,9 +87,20 @@
                 max="100"
             >
 
-            <p id="tempo">0:00 / 0:00</p>
 
-            <label>🔊 Volume</label>
+            <!-- TEMPO -->
+
+            <p id="tempo">
+                0:00 / 0:00
+            </p>
+
+
+            <!-- VOLUME -->
+
+            <label for="volume">
+                🔊 Volume
+            </label>
+
 
             <input
                 type="range"
@@ -62,19 +114,50 @@
         </div>
 
 
+        <!-- PLAYLIST -->
+
         <div class="lista">
 
-            <h2>🎶 Playlist</h2>
+            <h2>
+                🎶 Playlist
+            </h2>
 
-            <button class="musica-item" data-musica="0">
+
+            <!-- PESQUISA -->
+
+            <input
+                type="text"
+                id="pesquisa"
+                placeholder="🔎 Procurar música..."
+            >
+
+
+            <!-- MÚSICA 1 -->
+
+            <button
+                class="musica-item"
+                data-musica="0"
+            >
                 🎵 Música 1
             </button>
 
-            <button class="musica-item" data-musica="1">
+
+            <!-- MÚSICA 2 -->
+
+            <button
+                class="musica-item"
+                data-musica="1"
+            >
                 🎵 Música 2
             </button>
 
-            <button class="musica-item" data-musica="2">
+
+            <!-- MÚSICA 3 -->
+
+            <button
+                class="musica-item"
+                data-musica="2"
+            >
                 🎵 Música 3
             </button>
 
@@ -83,8 +166,11 @@
     </div>
 
 
+    <!-- JAVASCRIPT -->
+
     <script src="script.js"></script>
 
 </body>
 
 </html>
+```

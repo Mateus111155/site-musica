@@ -6,11 +6,17 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <title>Meu Site de Música</title>
+    <title>🎵 Meu Site de Música</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
 
 </head>
 
@@ -61,12 +67,15 @@
 
 
         <!-- ==================================
-             INÍCIO
+             INÍCIO / PLAYER
              ================================== -->
 
         <section id="inicio">
 
             <div class="player">
+
+
+                <!-- CAPA -->
 
                 <img
                     id="capa"
@@ -75,17 +84,25 @@
                 >
 
 
+                <!-- NOME DA MÚSICA -->
+
                 <h2 id="titulo">
                     Música 1
                 </h2>
 
+
+                <!-- ARTISTA -->
 
                 <p id="artista">
                     Artista 1
                 </p>
 
 
-                <audio id="musica"></audio>
+                <!-- ÁUDIO -->
+
+                <audio
+                    id="musica"
+                ></audio>
 
 
                 <!-- CONTROLES -->
@@ -111,7 +128,7 @@
                 </div>
 
 
-                <!-- ALEATÓRIO E REPETIR -->
+                <!-- MODOS -->
 
                 <div class="modos">
 
@@ -126,7 +143,7 @@
                 </div>
 
 
-                <!-- PROGRESSO -->
+                <!-- BARRA DE PROGRESSO -->
 
                 <input
                     type="range"
@@ -136,6 +153,8 @@
                     value="0"
                 >
 
+
+                <!-- TEMPO -->
 
                 <p id="tempo">
                     0:00 / 0:00
@@ -189,7 +208,39 @@
 
 
         <!-- ==================================
-             MÚSICAS
+             MÚSICAS DO ÁLBUM
+             ================================== -->
+
+        <section
+            id="album-musicas"
+            class="pagina"
+        >
+
+            <div class="lista">
+
+
+                <button id="voltarAlbuns">
+                    ← Voltar para álbuns
+                </button>
+
+
+                <h2 id="nomeAlbum">
+                    💿 Álbum
+                </h2>
+
+
+                <div
+                    id="lista-album-musicas"
+                ></div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ==================================
+             TODAS AS MÚSICAS
              ================================== -->
 
         <section
@@ -204,6 +255,8 @@
                 </h2>
 
 
+                <!-- PESQUISA -->
+
                 <input
                     type="text"
                     id="pesquisa"
@@ -211,7 +264,11 @@
                 >
 
 
-                <div id="lista-musicas"></div>
+                <!-- LISTA -->
+
+                <div
+                    id="lista-musicas"
+                ></div>
 
             </div>
 
@@ -235,7 +292,9 @@
                 </h2>
 
 
-                <div id="lista-favoritos"></div>
+                <div
+                    id="lista-favoritos"
+                ></div>
 
             </div>
 
@@ -245,9 +304,13 @@
     </main>
 
 
-    <!-- JAVASCRIPT -->
+
+    <!-- ======================================
+         JAVASCRIPT
+         ====================================== -->
 
     <script src="script.js"></script>
+
 
 </body>
 

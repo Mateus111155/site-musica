@@ -58,7 +58,7 @@ let favoritos =
 
 
 // ==========================================
-// ELEMENTOS HTML
+// ELEMENTOS DO HTML
 // ==========================================
 
 const musica =
@@ -120,26 +120,41 @@ function carregarMusica() {
         musicas[musicaAtual];
 
 
+    // Atualizar título
+
     titulo.textContent =
         musicaEscolhida.titulo;
 
+
+    // Atualizar artista
 
     artista.textContent =
         musicaEscolhida.artista;
 
 
+    // Atualizar capa
+
     capa.src =
         musicaEscolhida.capa;
 
+
+    // Atualizar arquivo
 
     musica.src =
         musicaEscolhida.arquivo;
 
 
+    // Reiniciar progresso
+
     progresso.value = 0;
 
 
     atualizarTempo();
+
+
+    // Atualizar destaque
+
+    atualizarMusicaSelecionada();
 
 }
 
@@ -173,10 +188,13 @@ pause.addEventListener(
 
 
 // ==========================================
-// PRÓXIMA
+// PRÓXIMA MÚSICA
 // ==========================================
 
 function proximaMusica() {
+
+
+    // REPETIR
 
     if (repetirAtivo) {
 
@@ -188,6 +206,8 @@ function proximaMusica() {
 
     }
 
+
+    // ALEATÓRIO
 
     if (aleatorioAtivo) {
 
@@ -215,6 +235,9 @@ function proximaMusica() {
 
     }
 
+
+    // NORMAL
+
     else {
 
         musicaAtual++;
@@ -238,6 +261,10 @@ function proximaMusica() {
 }
 
 
+// ==========================================
+// BOTÃO PRÓXIMA
+// ==========================================
+
 proxima.addEventListener(
     "click",
     function() {
@@ -249,7 +276,7 @@ proxima.addEventListener(
 
 
 // ==========================================
-// ANTERIOR
+// BOTÃO ANTERIOR
 // ==========================================
 
 anterior.addEventListener(
@@ -354,7 +381,7 @@ repetir.addEventListener(
 
 
 // ==========================================
-// PROGRESSO
+// BARRA DE PROGRESSO
 // ==========================================
 
 musica.addEventListener(
@@ -499,8 +526,12 @@ function criarPlaylist() {
         function(musicaItem, indice) {
 
 
+            // LINHA
+
             const linha =
-                document.createElement("div");
+                document.createElement(
+                    "div"
+                );
 
 
             linha.classList.add(
@@ -508,8 +539,12 @@ function criarPlaylist() {
             );
 
 
+            // BOTÃO DA MÚSICA
+
             const botao =
-                document.createElement("button");
+                document.createElement(
+                    "button"
+                );
 
 
             botao.classList.add(
@@ -521,6 +556,8 @@ function criarPlaylist() {
                 "🎵 " +
                 musicaItem.titulo;
 
+
+            // CLICAR NA MÚSICA
 
             botao.addEventListener(
                 "click",
@@ -539,14 +576,20 @@ function criarPlaylist() {
             );
 
 
+            // BOTÃO FAVORITO
+
             const favorito =
-                document.createElement("button");
+                document.createElement(
+                    "button"
+                );
 
 
             favorito.classList.add(
                 "favorito"
             );
 
+
+            // VERIFICAR FAVORITO
 
             if (
                 favoritos.includes(indice)
@@ -565,6 +608,8 @@ function criarPlaylist() {
             }
 
 
+            // CLICAR NO FAVORITO
+
             favorito.addEventListener(
                 "click",
                 function(event) {
@@ -579,6 +624,8 @@ function criarPlaylist() {
                 }
             );
 
+
+            // ADICIONAR ELEMENTOS
 
             linha.appendChild(
                 botao
@@ -597,11 +644,16 @@ function criarPlaylist() {
         }
     );
 
+
+    // ATUALIZAR DESTAQUE
+
+    atualizarMusicaSelecionada();
+
 }
 
 
 // ==========================================
-// FAVORITOS
+// ADICIONAR / REMOVER FAVORITO
 // ==========================================
 
 function adicionarFavorito(indice) {
@@ -629,11 +681,15 @@ function adicionarFavorito(indice) {
     }
 
 
+    // SALVAR NO NAVEGADOR
+
     localStorage.setItem(
         "favoritos",
         JSON.stringify(favoritos)
     );
 
+
+    // ATUALIZAR LISTAS
 
     criarPlaylist();
 
@@ -643,7 +699,7 @@ function adicionarFavorito(indice) {
 
 
 // ==========================================
-// CRIAR LISTA DE FAVORITOS
+// CRIAR FAVORITOS
 // ==========================================
 
 function criarFavoritos() {
@@ -651,7 +707,11 @@ function criarFavoritos() {
     listaFavoritos.innerHTML = "";
 
 
-    if (favoritos.length === 0) {
+    // NENHUM FAVORITO
+
+    if (
+        favoritos.length === 0
+    ) {
 
         listaFavoritos.innerHTML =
             "<p>Nenhuma música favorita ainda ❤️</p>";
@@ -660,6 +720,8 @@ function criarFavoritos() {
 
     }
 
+
+    // CRIAR FAVORITOS
 
     favoritos.forEach(
         function(indice) {
@@ -670,7 +732,9 @@ function criarFavoritos() {
 
 
             const botao =
-                document.createElement("button");
+                document.createElement(
+                    "button"
+                );
 
 
             botao.classList.add(
@@ -682,6 +746,8 @@ function criarFavoritos() {
                 "❤️ " +
                 musicaItem.titulo;
 
+
+            // CLICAR NO FAVORITO
 
             botao.addEventListener(
                 "click",
@@ -770,7 +836,63 @@ pesquisa.addEventListener(
 
 
 // ==========================================
-// INICIAR
+// DESTACAR MÚSICA ATUAL
+// ==========================================
+
+function atualizarMusicaSelecionada() {
+
+    const linhas =
+        document.querySelectorAll(
+            "#lista-musicas .musica-linha"
+        );
+
+
+    linhas.forEach(
+        function(linha, indice) {
+
+
+            const botao =
+                linha.querySelector(
+                    ".musica-item"
+                );
+
+
+            if (
+                indice === musicaAtual
+            ) {
+
+                linha.classList.add(
+                    "tocando"
+                );
+
+
+                botao.textContent =
+                    "▶️ " +
+                    musicas[indice].titulo;
+
+            }
+
+            else {
+
+                linha.classList.remove(
+                    "tocando"
+                );
+
+
+                botao.textContent =
+                    "🎵 " +
+                    musicas[indice].titulo;
+
+            }
+
+        }
+    );
+
+}
+
+
+// ==========================================
+// INICIAR SITE
 // ==========================================
 
 criarPlaylist();

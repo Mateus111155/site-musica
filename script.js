@@ -44,6 +44,16 @@ let musicaAtual = 0;
 
 
 // ==========================================
+// FAVORITOS
+// ==========================================
+
+let favoritos =
+    JSON.parse(
+        localStorage.getItem("favoritos")
+    ) || [];
+
+
+// ==========================================
 // ELEMENTOS DO HTML
 // ==========================================
 
@@ -125,86 +135,105 @@ function carregarMusica() {
 // PLAY
 // ==========================================
 
-play.addEventListener("click", function() {
+play.addEventListener(
+    "click",
+    function() {
 
-    musica.play();
+        musica.play();
 
-});
+    }
+);
 
 
 // ==========================================
 // PAUSAR
 // ==========================================
 
-pause.addEventListener("click", function() {
+pause.addEventListener(
+    "click",
+    function() {
 
-    musica.pause();
-
-});
-
-
-// ==========================================
-// PRÓXIMA MÚSICA
-// ==========================================
-
-proxima.addEventListener("click", function() {
-
-    musicaAtual++;
-
-
-    if (musicaAtual >= musicas.length) {
-
-        musicaAtual = 0;
+        musica.pause();
 
     }
-
-
-    carregarMusica();
-
-
-    musica.play();
-
-});
+);
 
 
 // ==========================================
-// MÚSICA ANTERIOR
+// PRÓXIMA
 // ==========================================
 
-anterior.addEventListener("click", function() {
+proxima.addEventListener(
+    "click",
+    function() {
 
-    musicaAtual--;
+        musicaAtual++;
 
 
-    if (musicaAtual < 0) {
+        if (
+            musicaAtual >= musicas.length
+        ) {
 
-        musicaAtual =
-            musicas.length - 1;
+            musicaAtual = 0;
+
+        }
+
+
+        carregarMusica();
+
+
+        musica.play();
 
     }
-
-
-    carregarMusica();
-
-
-    musica.play();
-
-});
+);
 
 
 // ==========================================
-// PROGRESSO DA MÚSICA
+// ANTERIOR
+// ==========================================
+
+anterior.addEventListener(
+    "click",
+    function() {
+
+        musicaAtual--;
+
+
+        if (musicaAtual < 0) {
+
+            musicaAtual =
+                musicas.length - 1;
+
+        }
+
+
+        carregarMusica();
+
+
+        musica.play();
+
+    }
+);
+
+
+// ==========================================
+// PROGRESSO
 // ==========================================
 
 musica.addEventListener(
     "timeupdate",
     function() {
 
-        if (!isNaN(musica.duration)) {
+
+        if (
+            !isNaN(musica.duration)
+        ) {
 
             const porcentagem =
-                (musica.currentTime /
-                musica.duration) * 100;
+                (
+                    musica.currentTime /
+                    musica.duration
+                ) * 100;
 
 
             progresso.value =
@@ -220,18 +249,22 @@ musica.addEventListener(
 
 
 // ==========================================
-// CLICAR NA BARRA
+// CLICAR NO PROGRESSO
 // ==========================================
 
 progresso.addEventListener(
     "input",
     function() {
 
-        if (!isNaN(musica.duration)) {
+
+        if (
+            !isNaN(musica.duration)
+        ) {
 
             const novoTempo =
-                (progresso.value / 100) *
-                musica.duration;
+                (
+                    progresso.value / 100
+                ) * musica.duration;
 
 
             musica.currentTime =
@@ -259,7 +292,7 @@ volume.addEventListener(
 
 
 // ==========================================
-// QUANDO A MÚSICA TERMINAR
+// MÚSICA TERMINOU
 // ==========================================
 
 musica.addEventListener(
@@ -269,7 +302,9 @@ musica.addEventListener(
         musicaAtual++;
 
 
-        if (musicaAtual >= musicas.length) {
+        if (
+            musicaAtual >= musicas.length
+        ) {
 
             musicaAtual = 0;
 
@@ -323,11 +358,15 @@ function formatarTempo(segundos) {
 
 
     const minutos =
-        Math.floor(segundos / 60);
+        Math.floor(
+            segundos / 60
+        );
 
 
     const segundosRestantes =
-        Math.floor(segundos % 60);
+        Math.floor(
+            segundos % 60
+        );
 
 
     return minutos + ":" +
@@ -349,6 +388,15 @@ function criarPlaylist() {
 
     musicas.forEach(
         function(musicaItem, indice) {
+
+
+            const linha =
+                document.createElement("div");
+
+
+            linha.classList.add(
+                "musica-linha"
+            );
 
 
             const botao =
@@ -382,12 +430,104 @@ function criarPlaylist() {
             );
 
 
-            listaMusicas.appendChild(
+            const favorito =
+                document.createElement("button");
+
+
+            favorito.classList.add(
+                "favorito"
+            );
+
+
+            if (
+                favoritos.includes(indice)
+            ) {
+
+                favorito.textContent =
+                    "❤️";
+
+            }
+
+            else {
+
+                favorito.textContent =
+                    "♡";
+
+            }
+
+
+            favorito.addEventListener(
+                "click",
+                function(event) {
+
+                    event.stopPropagation();
+
+
+                    adicionarFavorito(
+                        indice
+                    );
+
+                }
+            );
+
+
+            linha.appendChild(
                 botao
+            );
+
+
+            linha.appendChild(
+                favorito
+            );
+
+
+            listaMusicas.appendChild(
+                linha
             );
 
         }
     );
+
+}
+
+
+// ==========================================
+// ADICIONAR / REMOVER FAVORITO
+// ==========================================
+
+function adicionarFavorito(indice) {
+
+
+    if (
+        favoritos.includes(indice)
+    ) {
+
+
+        favoritos =
+            favoritos.filter(
+                function(item) {
+
+                    return item !== indice;
+
+                }
+            );
+
+    }
+
+    else {
+
+        favoritos.push(indice);
+
+    }
+
+
+    localStorage.setItem(
+        "favoritos",
+        JSON.stringify(favoritos)
+    );
+
+
+    criarPlaylist();
 
 }
 
@@ -452,7 +592,7 @@ pesquisa.addEventListener(
 
 
 // ==========================================
-// INICIAR O SITE
+// INICIAR
 // ==========================================
 
 criarPlaylist();

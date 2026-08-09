@@ -1,29 +1,51 @@
+// ==============================
+// LISTA DE MÚSICAS
+// ==============================
+
 const musicas = [
 
     {
         titulo: "Música 1",
-        arquivo: "musica1.mp3"
+        artista: "Artista 1",
+        arquivo: "musica1.mp3",
+        capa: "capa1.jpg"
     },
 
     {
         titulo: "Música 2",
-        arquivo: "musica2.mp3"
+        artista: "Artista 2",
+        arquivo: "musica2.mp3",
+        capa: "capa2.jpg"
     },
 
     {
         titulo: "Música 3",
-        arquivo: "musica3.mp3"
+        artista: "Artista 3",
+        arquivo: "musica3.mp3",
+        capa: "capa3.jpg"
     }
 
 ];
 
 
+// ==============================
+// MÚSICA ATUAL
+// ==============================
+
 let musicaAtual = 0;
 
+
+// ==============================
+// ELEMENTOS DO HTML
+// ==============================
 
 const musica = document.getElementById("musica");
 
 const titulo = document.getElementById("titulo");
+
+const artista = document.getElementById("artista");
+
+const capa = document.getElementById("capa");
 
 const play = document.getElementById("play");
 
@@ -40,18 +62,32 @@ const tempo = document.getElementById("tempo");
 const volume = document.getElementById("volume");
 
 
+// ==============================
+// CARREGAR MÚSICA
+// ==============================
+
 function carregarMusica() {
 
     const musicaEscolhida = musicas[musicaAtual];
 
     titulo.textContent = musicaEscolhida.titulo;
 
+    artista.textContent = musicaEscolhida.artista;
+
+    capa.src = musicaEscolhida.capa;
+
     musica.src = musicaEscolhida.arquivo;
 
     progresso.value = 0;
 
+    atualizarTempo();
+
 }
 
+
+// ==============================
+// BOTÃO PLAY
+// ==============================
 
 play.addEventListener("click", function() {
 
@@ -60,6 +96,10 @@ play.addEventListener("click", function() {
 });
 
 
+// ==============================
+// BOTÃO PAUSAR
+// ==============================
+
 pause.addEventListener("click", function() {
 
     musica.pause();
@@ -67,12 +107,18 @@ pause.addEventListener("click", function() {
 });
 
 
+// ==============================
+// PRÓXIMA MÚSICA
+// ==============================
+
 proxima.addEventListener("click", function() {
 
     musicaAtual++;
 
     if (musicaAtual >= musicas.length) {
+
         musicaAtual = 0;
+
     }
 
     carregarMusica();
@@ -81,13 +127,19 @@ proxima.addEventListener("click", function() {
 
 });
 
+
+// ==============================
+// MÚSICA ANTERIOR
+// ==============================
 
 anterior.addEventListener("click", function() {
 
     musicaAtual--;
 
     if (musicaAtual < 0) {
+
         musicaAtual = musicas.length - 1;
+
     }
 
     carregarMusica();
@@ -97,27 +149,47 @@ anterior.addEventListener("click", function() {
 });
 
 
+// ==============================
+// ATUALIZAR PROGRESSO
+// ==============================
+
 musica.addEventListener("timeupdate", function() {
 
-    const porcentagem =
-        (musica.currentTime / musica.duration) * 100;
+    if (!isNaN(musica.duration)) {
 
-    progresso.value = porcentagem;
+        const porcentagem =
+            (musica.currentTime / musica.duration) * 100;
+
+        progresso.value = porcentagem;
+
+    }
 
     atualizarTempo();
 
 });
 
 
+// ==============================
+// CLICAR NA BARRA DE PROGRESSO
+// ==============================
+
 progresso.addEventListener("input", function() {
 
-    const novoTempo =
-        (progresso.value / 100) * musica.duration;
+    if (!isNaN(musica.duration)) {
 
-    musica.currentTime = novoTempo;
+        const novoTempo =
+            (progresso.value / 100) * musica.duration;
+
+        musica.currentTime = novoTempo;
+
+    }
 
 });
 
+
+// ==============================
+// CONTROLE DE VOLUME
+// ==============================
 
 volume.addEventListener("input", function() {
 
@@ -126,40 +198,74 @@ volume.addEventListener("input", function() {
 });
 
 
+// ==============================
+// QUANDO A MÚSICA TERMINAR
+// ==============================
+
 musica.addEventListener("ended", function() {
 
-    proxima.click();
+    musicaAtual++;
+
+    if (musicaAtual >= musicas.length) {
+
+        musicaAtual = 0;
+
+    }
+
+    carregarMusica();
+
+    musica.play();
 
 });
 
 
+// ==============================
+// ATUALIZAR TEMPO
+// ==============================
+
 function atualizarTempo() {
 
-    const atual = formatarTempo(musica.currentTime);
+    const atual =
+        formatarTempo(musica.currentTime);
 
-    const total = formatarTempo(musica.duration);
+    const total =
+        formatarTempo(musica.duration);
 
-    tempo.textContent = atual + " / " + total;
+    tempo.textContent =
+        atual + " / " + total;
 
 }
 
 
+// ==============================
+// FORMATAR TEMPO
+// ==============================
+
 function formatarTempo(segundos) {
 
     if (isNaN(segundos)) {
+
         return "0:00";
+
     }
 
-    const minutos = Math.floor(segundos / 60);
+    const minutos =
+        Math.floor(segundos / 60);
 
     const segundosRestantes =
         Math.floor(segundos % 60);
 
     return minutos + ":" +
-        segundosRestantes.toString().padStart(2, "0");
+        segundosRestantes
+        .toString()
+        .padStart(2, "0");
 
 }
 
+
+// ==============================
+// BOTÕES DA PLAYLIST
+// ==============================
 
 const botoesMusica =
     document.querySelectorAll(".musica-item");
@@ -180,5 +286,9 @@ botoesMusica.forEach(function(botao) {
 
 });
 
+
+// ==============================
+// CARREGAR A PRIMEIRA MÚSICA
+// ==============================
 
 carregarMusica();

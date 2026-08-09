@@ -96,6 +96,9 @@ const pesquisa =
 const listaMusicas =
     document.getElementById("lista-musicas");
 
+const listaFavoritos =
+    document.getElementById("lista-favoritos");
+
 
 // ==========================================
 // CARREGAR MÚSICA
@@ -160,7 +163,7 @@ pause.addEventListener(
 
 
 // ==========================================
-// PRÓXIMA
+// PRÓXIMA MÚSICA
 // ==========================================
 
 proxima.addEventListener(
@@ -189,7 +192,7 @@ proxima.addEventListener(
 
 
 // ==========================================
-// ANTERIOR
+// MÚSICA ANTERIOR
 // ==========================================
 
 anterior.addEventListener(
@@ -249,7 +252,7 @@ musica.addEventListener(
 
 
 // ==========================================
-// CLICAR NO PROGRESSO
+// CLICAR NA BARRA
 // ==========================================
 
 progresso.addEventListener(
@@ -529,6 +532,76 @@ function adicionarFavorito(indice) {
 
     criarPlaylist();
 
+    criarFavoritos();
+
+}
+
+
+// ==========================================
+// CRIAR LISTA DE FAVORITOS
+// ==========================================
+
+function criarFavoritos() {
+
+    listaFavoritos.innerHTML = "";
+
+
+    if (favoritos.length === 0) {
+
+        listaFavoritos.innerHTML =
+            "<p>Nenhuma música favorita ainda ❤️</p>";
+
+        return;
+
+    }
+
+
+    favoritos.forEach(
+        function(indice) {
+
+
+            const musicaItem =
+                musicas[indice];
+
+
+            const botao =
+                document.createElement("button");
+
+
+            botao.classList.add(
+                "musica-item"
+            );
+
+
+            botao.textContent =
+                "❤️ " +
+                musicaItem.titulo;
+
+
+            botao.addEventListener(
+                "click",
+                function() {
+
+                    musicaAtual =
+                        indice;
+
+
+                    carregarMusica();
+
+
+                    musica.play();
+
+                }
+            );
+
+
+            listaFavoritos.appendChild(
+                botao
+            );
+
+        }
+    );
+
 }
 
 
@@ -570,17 +643,39 @@ pesquisa.addEventListener(
                     nomeArtista.includes(texto)
                 ) {
 
-                    botoes[indice]
-                        .style.display =
-                        "block";
+                    const botao =
+                        document.querySelector(
+                            "#lista-musicas .musica-linha:nth-child(" +
+                            (indice + 1) +
+                            ")"
+                        );
+
+
+                    if (botao) {
+
+                        botao.style.display =
+                            "flex";
+
+                    }
 
                 }
 
                 else {
 
-                    botoes[indice]
-                        .style.display =
-                        "none";
+                    const botao =
+                        document.querySelector(
+                            "#lista-musicas .musica-linha:nth-child(" +
+                            (indice + 1) +
+                            ")"
+                        );
+
+
+                    if (botao) {
+
+                        botao.style.display =
+                            "none";
+
+                    }
 
                 }
 
@@ -592,10 +687,12 @@ pesquisa.addEventListener(
 
 
 // ==========================================
-// INICIAR
+// INICIAR O SITE
 // ==========================================
 
 criarPlaylist();
+
+criarFavoritos();
 
 carregarMusica();
 ```

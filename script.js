@@ -1,7 +1,37 @@
+const musicas = [
+
+    {
+        titulo: "Música 1",
+        arquivo: "musica1.mp3"
+    },
+
+    {
+        titulo: "Música 2",
+        arquivo: "musica2.mp3"
+    },
+
+    {
+        titulo: "Música 3",
+        arquivo: "musica3.mp3"
+    }
+
+];
+
+
+let musicaAtual = 0;
+
+
 const musica = document.getElementById("musica");
 
+const titulo = document.getElementById("titulo");
+
 const play = document.getElementById("play");
+
 const pause = document.getElementById("pause");
+
+const anterior = document.getElementById("anterior");
+
+const proxima = document.getElementById("proxima");
 
 const progresso = document.getElementById("progresso");
 
@@ -10,7 +40,19 @@ const tempo = document.getElementById("tempo");
 const volume = document.getElementById("volume");
 
 
-// PLAY
+function carregarMusica() {
+
+    const musicaEscolhida = musicas[musicaAtual];
+
+    titulo.textContent = musicaEscolhida.titulo;
+
+    musica.src = musicaEscolhida.arquivo;
+
+    progresso.value = 0;
+
+}
+
+
 play.addEventListener("click", function() {
 
     musica.play();
@@ -18,7 +60,6 @@ play.addEventListener("click", function() {
 });
 
 
-// PAUSE
 pause.addEventListener("click", function() {
 
     musica.pause();
@@ -26,7 +67,36 @@ pause.addEventListener("click", function() {
 });
 
 
-// PROGRESSO DA MÚSICA
+proxima.addEventListener("click", function() {
+
+    musicaAtual++;
+
+    if (musicaAtual >= musicas.length) {
+        musicaAtual = 0;
+    }
+
+    carregarMusica();
+
+    musica.play();
+
+});
+
+
+anterior.addEventListener("click", function() {
+
+    musicaAtual--;
+
+    if (musicaAtual < 0) {
+        musicaAtual = musicas.length - 1;
+    }
+
+    carregarMusica();
+
+    musica.play();
+
+});
+
+
 musica.addEventListener("timeupdate", function() {
 
     const porcentagem =
@@ -39,7 +109,6 @@ musica.addEventListener("timeupdate", function() {
 });
 
 
-// CLICAR NA BARRA
 progresso.addEventListener("input", function() {
 
     const novoTempo =
@@ -50,7 +119,6 @@ progresso.addEventListener("input", function() {
 });
 
 
-// VOLUME
 volume.addEventListener("input", function() {
 
     musica.volume = volume.value;
@@ -58,7 +126,13 @@ volume.addEventListener("input", function() {
 });
 
 
-// ATUALIZAR TEMPO
+musica.addEventListener("ended", function() {
+
+    proxima.click();
+
+});
+
+
 function atualizarTempo() {
 
     const atual = formatarTempo(musica.currentTime);
@@ -70,7 +144,6 @@ function atualizarTempo() {
 }
 
 
-// FORMATAR TEMPO
 function formatarTempo(segundos) {
 
     if (isNaN(segundos)) {
@@ -84,4 +157,28 @@ function formatarTempo(segundos) {
 
     return minutos + ":" +
         segundosRestantes.toString().padStart(2, "0");
+
 }
+
+
+const botoesMusica =
+    document.querySelectorAll(".musica-item");
+
+
+botoesMusica.forEach(function(botao) {
+
+    botao.addEventListener("click", function() {
+
+        musicaAtual =
+            Number(botao.dataset.musica);
+
+        carregarMusica();
+
+        musica.play();
+
+    });
+
+});
+
+
+carregarMusica();

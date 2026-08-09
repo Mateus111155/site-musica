@@ -1,4 +1,4 @@
-```javascript id="a8v3k2"
+```javascript
 // ==========================================
 // LISTA DE MÚSICAS
 // ==========================================
@@ -30,6 +30,35 @@ const musicas = [
         titulo: "Música 4",
         artista: "Artista 4",
         arquivo: "musica4.mp3",
+        capa: "capa4.jpg"
+    }
+
+];
+
+
+// ==========================================
+// ÁLBUNS
+// ==========================================
+
+const albuns = [
+
+    {
+        nome: "Meu Primeiro Álbum",
+        capa: "capa1.jpg"
+    },
+
+    {
+        nome: "Melhores Músicas",
+        capa: "capa2.jpg"
+    },
+
+    {
+        nome: "Músicas Favoritas",
+        capa: "capa3.jpg"
+    },
+
+    {
+        nome: "Minha Playlist",
         capa: "capa4.jpg"
     }
 
@@ -141,7 +170,6 @@ function carregarMusica() {
 
     atualizarTempo();
 
-
     atualizarMusicaSelecionada();
 
 }
@@ -180,7 +208,6 @@ pause.addEventListener(
 // ==========================================
 
 function proximaMusica() {
-
 
     if (repetirAtivo) {
 
@@ -253,7 +280,7 @@ proxima.addEventListener(
 
 
 // ==========================================
-// ANTERIOR
+// MÚSICA ANTERIOR
 // ==========================================
 
 anterior.addEventListener(
@@ -345,7 +372,6 @@ musica.addEventListener(
     "timeupdate",
     function() {
 
-
         if (
             !isNaN(musica.duration)
         ) {
@@ -366,13 +392,12 @@ musica.addEventListener(
 
 
 // ==========================================
-// CLICAR NA BARRA
+// ALTERAR POSIÇÃO DA MÚSICA
 // ==========================================
 
 progresso.addEventListener(
     "input",
     function() {
-
 
         if (
             !isNaN(musica.duration)
@@ -477,7 +502,6 @@ function criarPlaylist() {
     musicas.forEach(
         function(musicaItem, indice) {
 
-
             const linha =
                 document.createElement(
                     "div"
@@ -575,11 +599,10 @@ function criarPlaylist() {
 
 
 // ==========================================
-// ADICIONAR / REMOVER FAVORITO
+// FAVORITOS
 // ==========================================
 
 function adicionarFavorito(indice) {
-
 
     if (
         favoritos.includes(indice)
@@ -640,7 +663,6 @@ function criarFavoritos() {
     favoritos.forEach(
         function(indice) {
 
-
             const musicaItem =
                 musicas[indice];
 
@@ -694,7 +716,6 @@ pesquisa.addEventListener(
     "input",
     function() {
 
-
         const texto =
             pesquisa.value
                 .toLowerCase();
@@ -708,7 +729,6 @@ pesquisa.addEventListener(
 
         musicas.forEach(
             function(musicaItem, indice) {
-
 
                 const nome =
                     musicaItem.titulo
@@ -761,7 +781,6 @@ function atualizarMusicaSelecionada() {
     linhas.forEach(
         function(linha, indice) {
 
-
             const botao =
                 linha.querySelector(
                     ".musica-item"
@@ -803,6 +822,79 @@ function atualizarMusicaSelecionada() {
 
 
 // ==========================================
+// CRIAR ÁLBUNS
+// ==========================================
+
+function criarAlbuns() {
+
+    const listaAlbuns =
+        document.getElementById(
+            "lista-albuns"
+        );
+
+
+    listaAlbuns.innerHTML = "";
+
+
+    albuns.forEach(
+        function(album) {
+
+            const div =
+                document.createElement(
+                    "div"
+                );
+
+
+            div.classList.add(
+                "album"
+            );
+
+
+            const imagem =
+                document.createElement(
+                    "img"
+                );
+
+
+            imagem.src =
+                album.capa;
+
+
+            imagem.alt =
+                album.nome;
+
+
+            const tituloAlbum =
+                document.createElement(
+                    "h3"
+                );
+
+
+            tituloAlbum.textContent =
+                album.nome;
+
+
+            div.appendChild(
+                imagem
+            );
+
+
+            div.appendChild(
+                tituloAlbum
+            );
+
+
+            listaAlbuns.appendChild(
+                div
+            );
+
+        }
+    );
+
+}
+
+
+// ==========================================
 // MENU
 // ==========================================
 
@@ -811,10 +903,18 @@ const menuInicio =
         "menuInicio"
     );
 
+
+const menuAlbuns =
+    document.getElementById(
+        "menuAlbuns"
+    );
+
+
 const menuMusicas =
     document.getElementById(
         "menuMusicas"
     );
+
 
 const menuFavoritos =
     document.getElementById(
@@ -827,10 +927,18 @@ const inicio =
         "inicio"
     );
 
+
+const paginaAlbuns =
+    document.getElementById(
+        "albuns"
+    );
+
+
 const paginaMusicas =
     document.getElementById(
         "musicas"
     );
+
 
 const paginaFavoritos =
     document.getElementById(
@@ -847,6 +955,9 @@ function mostrarInicio() {
     inicio.style.display =
         "block";
 
+    paginaAlbuns.style.display =
+        "none";
+
     paginaMusicas.style.display =
         "none";
 
@@ -855,6 +966,48 @@ function mostrarInicio() {
 
 
     menuInicio.classList.add(
+        "ativo"
+    );
+
+    menuAlbuns.classList.remove(
+        "ativo"
+    );
+
+    menuMusicas.classList.remove(
+        "ativo"
+    );
+
+    menuFavoritos.classList.remove(
+        "ativo"
+    );
+
+}
+
+
+// ==========================================
+// MOSTRAR ÁLBUNS
+// ==========================================
+
+function mostrarAlbuns() {
+
+    inicio.style.display =
+        "none";
+
+    paginaAlbuns.style.display =
+        "block";
+
+    paginaMusicas.style.display =
+        "none";
+
+    paginaFavoritos.style.display =
+        "none";
+
+
+    menuInicio.classList.remove(
+        "ativo"
+    );
+
+    menuAlbuns.classList.add(
         "ativo"
     );
 
@@ -878,6 +1031,9 @@ function mostrarMusicas() {
     inicio.style.display =
         "none";
 
+    paginaAlbuns.style.display =
+        "none";
+
     paginaMusicas.style.display =
         "block";
 
@@ -886,6 +1042,10 @@ function mostrarMusicas() {
 
 
     menuInicio.classList.remove(
+        "ativo"
+    );
+
+    menuAlbuns.classList.remove(
         "ativo"
     );
 
@@ -909,6 +1069,9 @@ function mostrarFavoritos() {
     inicio.style.display =
         "none";
 
+    paginaAlbuns.style.display =
+        "none";
+
     paginaMusicas.style.display =
         "none";
 
@@ -917,6 +1080,10 @@ function mostrarFavoritos() {
 
 
     menuInicio.classList.remove(
+        "ativo"
+    );
+
+    menuAlbuns.classList.remove(
         "ativo"
     );
 
@@ -941,6 +1108,12 @@ menuInicio.addEventListener(
 );
 
 
+menuAlbuns.addEventListener(
+    "click",
+    mostrarAlbuns
+);
+
+
 menuMusicas.addEventListener(
     "click",
     mostrarMusicas
@@ -954,12 +1127,14 @@ menuFavoritos.addEventListener(
 
 
 // ==========================================
-// INICIAR
+// INICIAR SITE
 // ==========================================
 
 criarPlaylist();
 
 criarFavoritos();
+
+criarAlbuns();
 
 carregarMusica();
 

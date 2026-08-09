@@ -538,3 +538,24 @@ main {
     font-size: 16px;
 
 }
+.album {
+    background: #333;
+    padding: 10px;
+    border-radius: 15px;
+    cursor: pointer;
+    text-align: center;
+    transition: 0.2s;
+}
+
+.album:hover {
+    transform: scale(1.03);
+    background: #444;
+}
+
+.album img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}

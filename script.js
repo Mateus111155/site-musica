@@ -37,10 +37,14 @@ const musicas = [
 
 
 // ==========================================
-// MÚSICA ATUAL
+// VARIÁVEIS
 // ==========================================
 
 let musicaAtual = 0;
+
+let aleatorioAtivo = false;
+
+let repetirAtivo = false;
 
 
 // ==========================================
@@ -54,7 +58,7 @@ let favoritos =
 
 
 // ==========================================
-// ELEMENTOS DO HTML
+// ELEMENTOS HTML
 // ==========================================
 
 const musica =
@@ -98,6 +102,12 @@ const listaMusicas =
 
 const listaFavoritos =
     document.getElementById("lista-favoritos");
+
+const aleatorio =
+    document.getElementById("aleatorio");
+
+const repetir =
+    document.getElementById("repetir");
 
 
 // ==========================================
@@ -149,7 +159,7 @@ play.addEventListener(
 
 
 // ==========================================
-// PAUSAR
+// PAUSE
 // ==========================================
 
 pause.addEventListener(
@@ -163,12 +173,49 @@ pause.addEventListener(
 
 
 // ==========================================
-// PRÓXIMA MÚSICA
+// PRÓXIMA
 // ==========================================
 
-proxima.addEventListener(
-    "click",
-    function() {
+function proximaMusica() {
+
+    if (repetirAtivo) {
+
+        musica.currentTime = 0;
+
+        musica.play();
+
+        return;
+
+    }
+
+
+    if (aleatorioAtivo) {
+
+        let novaMusica;
+
+
+        do {
+
+            novaMusica =
+                Math.floor(
+                    Math.random() *
+                    musicas.length
+                );
+
+        }
+
+        while (
+            novaMusica === musicaAtual &&
+            musicas.length > 1
+        );
+
+
+        musicaAtual =
+            novaMusica;
+
+    }
+
+    else {
 
         musicaAtual++;
 
@@ -181,18 +228,28 @@ proxima.addEventListener(
 
         }
 
+    }
 
-        carregarMusica();
+
+    carregarMusica();
+
+    musica.play();
+
+}
 
 
-        musica.play();
+proxima.addEventListener(
+    "click",
+    function() {
+
+        proximaMusica();
 
     }
 );
 
 
 // ==========================================
-// MÚSICA ANTERIOR
+// ANTERIOR
 // ==========================================
 
 anterior.addEventListener(
@@ -212,8 +269,85 @@ anterior.addEventListener(
 
         carregarMusica();
 
-
         musica.play();
+
+    }
+);
+
+
+// ==========================================
+// MÚSICA TERMINOU
+// ==========================================
+
+musica.addEventListener(
+    "ended",
+    function() {
+
+        proximaMusica();
+
+    }
+);
+
+
+// ==========================================
+// MODO ALEATÓRIO
+// ==========================================
+
+aleatorio.addEventListener(
+    "click",
+    function() {
+
+        aleatorioAtivo =
+            !aleatorioAtivo;
+
+
+        if (aleatorioAtivo) {
+
+            aleatorio.classList.add(
+                "ativo"
+            );
+
+        }
+
+        else {
+
+            aleatorio.classList.remove(
+                "ativo"
+            );
+
+        }
+
+    }
+);
+
+
+// ==========================================
+// MODO REPETIR
+// ==========================================
+
+repetir.addEventListener(
+    "click",
+    function() {
+
+        repetirAtivo =
+            !repetirAtivo;
+
+
+        if (repetirAtivo) {
+
+            repetir.classList.add(
+                "ativo"
+            );
+
+        }
+
+        else {
+
+            repetir.classList.remove(
+                "ativo"
+            );
+
+        }
 
     }
 );
@@ -267,7 +401,8 @@ progresso.addEventListener(
             const novoTempo =
                 (
                     progresso.value / 100
-                ) * musica.duration;
+                ) *
+                musica.duration;
 
 
             musica.currentTime =
@@ -289,35 +424,6 @@ volume.addEventListener(
 
         musica.volume =
             volume.value;
-
-    }
-);
-
-
-// ==========================================
-// MÚSICA TERMINOU
-// ==========================================
-
-musica.addEventListener(
-    "ended",
-    function() {
-
-        musicaAtual++;
-
-
-        if (
-            musicaAtual >= musicas.length
-        ) {
-
-            musicaAtual = 0;
-
-        }
-
-
-        carregarMusica();
-
-
-        musica.play();
 
     }
 );
@@ -495,7 +601,7 @@ function criarPlaylist() {
 
 
 // ==========================================
-// ADICIONAR / REMOVER FAVORITO
+// FAVORITOS
 // ==========================================
 
 function adicionarFavorito(indice) {
@@ -504,7 +610,6 @@ function adicionarFavorito(indice) {
     if (
         favoritos.includes(indice)
     ) {
-
 
         favoritos =
             favoritos.filter(
@@ -618,9 +723,9 @@ pesquisa.addEventListener(
             pesquisa.value.toLowerCase();
 
 
-        const botoes =
+        const linhas =
             document.querySelectorAll(
-                ".musica-item"
+                "#lista-musicas .musica-linha"
             );
 
 
@@ -643,39 +748,17 @@ pesquisa.addEventListener(
                     nomeArtista.includes(texto)
                 ) {
 
-                    const botao =
-                        document.querySelector(
-                            "#lista-musicas .musica-linha:nth-child(" +
-                            (indice + 1) +
-                            ")"
-                        );
-
-
-                    if (botao) {
-
-                        botao.style.display =
-                            "flex";
-
-                    }
+                    linhas[indice]
+                        .style.display =
+                        "flex";
 
                 }
 
                 else {
 
-                    const botao =
-                        document.querySelector(
-                            "#lista-musicas .musica-linha:nth-child(" +
-                            (indice + 1) +
-                            ")"
-                        );
-
-
-                    if (botao) {
-
-                        botao.style.display =
-                            "none";
-
-                    }
+                    linhas[indice]
+                        .style.display =
+                        "none";
 
                 }
 
@@ -687,7 +770,7 @@ pesquisa.addEventListener(
 
 
 // ==========================================
-// INICIAR O SITE
+// INICIAR
 // ==========================================
 
 criarPlaylist();

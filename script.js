@@ -1,6 +1,7 @@
-// ==============================
+```javascript
+// ==========================================
 // LISTA DE MÚSICAS
-// ==============================
+// ==========================================
 
 const musicas = [
 
@@ -23,72 +24,106 @@ const musicas = [
         artista: "Artista 3",
         arquivo: "musica3.mp3",
         capa: "capa3.jpg"
+    },
+
+    {
+        titulo: "Música 4",
+        artista: "Artista 4",
+        arquivo: "musica4.mp3",
+        capa: "capa4.jpg"
     }
 
 ];
 
 
-// ==============================
+// ==========================================
 // MÚSICA ATUAL
-// ==============================
+// ==========================================
 
 let musicaAtual = 0;
 
 
-// ==============================
+// ==========================================
 // ELEMENTOS DO HTML
-// ==============================
+// ==========================================
 
-const musica = document.getElementById("musica");
+const musica =
+    document.getElementById("musica");
 
-const titulo = document.getElementById("titulo");
+const titulo =
+    document.getElementById("titulo");
 
-const artista = document.getElementById("artista");
+const artista =
+    document.getElementById("artista");
 
-const capa = document.getElementById("capa");
+const capa =
+    document.getElementById("capa");
 
-const play = document.getElementById("play");
+const play =
+    document.getElementById("play");
 
-const pause = document.getElementById("pause");
+const pause =
+    document.getElementById("pause");
 
-const anterior = document.getElementById("anterior");
+const anterior =
+    document.getElementById("anterior");
 
-const proxima = document.getElementById("proxima");
+const proxima =
+    document.getElementById("proxima");
 
-const progresso = document.getElementById("progresso");
+const progresso =
+    document.getElementById("progresso");
 
-const tempo = document.getElementById("tempo");
+const tempo =
+    document.getElementById("tempo");
 
-const volume = document.getElementById("volume");
+const volume =
+    document.getElementById("volume");
 
-const pesquisa = document.getElementById("pesquisa");
+const pesquisa =
+    document.getElementById("pesquisa");
 
-// ==============================
+const listaMusicas =
+    document.getElementById("lista-musicas");
+
+
+// ==========================================
 // CARREGAR MÚSICA
-// ==============================
+// ==========================================
 
 function carregarMusica() {
 
-    const musicaEscolhida = musicas[musicaAtual];
+    const musicaEscolhida =
+        musicas[musicaAtual];
 
-    titulo.textContent = musicaEscolhida.titulo;
 
-    artista.textContent = musicaEscolhida.artista;
+    titulo.textContent =
+        musicaEscolhida.titulo;
 
-    capa.src = musicaEscolhida.capa;
 
-    musica.src = musicaEscolhida.arquivo;
+    artista.textContent =
+        musicaEscolhida.artista;
+
+
+    capa.src =
+        musicaEscolhida.capa;
+
+
+    musica.src =
+        musicaEscolhida.arquivo;
+
 
     progresso.value = 0;
+
 
     atualizarTempo();
 
 }
 
 
-// ==============================
-// BOTÃO PLAY
-// ==============================
+// ==========================================
+// PLAY
+// ==========================================
 
 play.addEventListener("click", function() {
 
@@ -97,9 +132,9 @@ play.addEventListener("click", function() {
 });
 
 
-// ==============================
-// BOTÃO PAUSAR
-// ==============================
+// ==========================================
+// PAUSAR
+// ==========================================
 
 pause.addEventListener("click", function() {
 
@@ -108,129 +143,165 @@ pause.addEventListener("click", function() {
 });
 
 
-// ==============================
+// ==========================================
 // PRÓXIMA MÚSICA
-// ==============================
+// ==========================================
 
 proxima.addEventListener("click", function() {
 
     musicaAtual++;
 
+
     if (musicaAtual >= musicas.length) {
 
         musicaAtual = 0;
 
     }
 
+
     carregarMusica();
+
 
     musica.play();
 
 });
 
 
-// ==============================
+// ==========================================
 // MÚSICA ANTERIOR
-// ==============================
+// ==========================================
 
 anterior.addEventListener("click", function() {
 
     musicaAtual--;
 
+
     if (musicaAtual < 0) {
 
-        musicaAtual = musicas.length - 1;
+        musicaAtual =
+            musicas.length - 1;
 
     }
 
+
     carregarMusica();
+
 
     musica.play();
 
 });
 
 
-// ==============================
-// ATUALIZAR PROGRESSO
-// ==============================
+// ==========================================
+// PROGRESSO DA MÚSICA
+// ==========================================
 
-musica.addEventListener("timeupdate", function() {
+musica.addEventListener(
+    "timeupdate",
+    function() {
 
-    if (!isNaN(musica.duration)) {
+        if (!isNaN(musica.duration)) {
 
-        const porcentagem =
-            (musica.currentTime / musica.duration) * 100;
-
-        progresso.value = porcentagem;
-
-    }
-
-    atualizarTempo();
-
-});
+            const porcentagem =
+                (musica.currentTime /
+                musica.duration) * 100;
 
 
-// ==============================
-// CLICAR NA BARRA DE PROGRESSO
-// ==============================
+            progresso.value =
+                porcentagem;
 
-progresso.addEventListener("input", function() {
+        }
 
-    if (!isNaN(musica.duration)) {
 
-        const novoTempo =
-            (progresso.value / 100) * musica.duration;
-
-        musica.currentTime = novoTempo;
+        atualizarTempo();
 
     }
-
-});
-
-
-// ==============================
-// CONTROLE DE VOLUME
-// ==============================
-
-volume.addEventListener("input", function() {
-
-    musica.volume = volume.value;
-
-});
+);
 
 
-// ==============================
+// ==========================================
+// CLICAR NA BARRA
+// ==========================================
+
+progresso.addEventListener(
+    "input",
+    function() {
+
+        if (!isNaN(musica.duration)) {
+
+            const novoTempo =
+                (progresso.value / 100) *
+                musica.duration;
+
+
+            musica.currentTime =
+                novoTempo;
+
+        }
+
+    }
+);
+
+
+// ==========================================
+// VOLUME
+// ==========================================
+
+volume.addEventListener(
+    "input",
+    function() {
+
+        musica.volume =
+            volume.value;
+
+    }
+);
+
+
+// ==========================================
 // QUANDO A MÚSICA TERMINAR
-// ==============================
+// ==========================================
 
-musica.addEventListener("ended", function() {
+musica.addEventListener(
+    "ended",
+    function() {
 
-    musicaAtual++;
+        musicaAtual++;
 
-    if (musicaAtual >= musicas.length) {
 
-        musicaAtual = 0;
+        if (musicaAtual >= musicas.length) {
+
+            musicaAtual = 0;
+
+        }
+
+
+        carregarMusica();
+
+
+        musica.play();
 
     }
-
-    carregarMusica();
-
-    musica.play();
-
-});
+);
 
 
-// ==============================
+// ==========================================
 // ATUALIZAR TEMPO
-// ==============================
+// ==========================================
 
 function atualizarTempo() {
 
     const atual =
-        formatarTempo(musica.currentTime);
+        formatarTempo(
+            musica.currentTime
+        );
+
 
     const total =
-        formatarTempo(musica.duration);
+        formatarTempo(
+            musica.duration
+        );
+
 
     tempo.textContent =
         atual + " / " + total;
@@ -238,9 +309,9 @@ function atualizarTempo() {
 }
 
 
-// ==============================
+// ==========================================
 // FORMATAR TEMPO
-// ==============================
+// ==========================================
 
 function formatarTempo(segundos) {
 
@@ -250,11 +321,14 @@ function formatarTempo(segundos) {
 
     }
 
+
     const minutos =
         Math.floor(segundos / 60);
 
+
     const segundosRestantes =
         Math.floor(segundos % 60);
+
 
     return minutos + ":" +
         segundosRestantes
@@ -264,65 +338,124 @@ function formatarTempo(segundos) {
 }
 
 
-// ==============================
-// BOTÕES DA PLAYLIST
-// ==============================
+// ==========================================
+// CRIAR PLAYLIST
+// ==========================================
 
-const botoesMusica =
-    document.querySelectorAll(".musica-item");
+function criarPlaylist() {
 
-
-botoesMusica.forEach(function(botao) {
-
-    botao.addEventListener("click", function() {
-
-        musicaAtual =
-            Number(botao.dataset.musica);
-
-        carregarMusica();
-
-        musica.play();
-
-    });
-
-});
+    listaMusicas.innerHTML = "";
 
 
-// ==============================
-// CARREGAR A PRIMEIRA MÚSICA
-// ==============================
+    musicas.forEach(
+        function(musicaItem, indice) {
 
-carregarMusica();
 
-pesquisa.addEventListener("input", function() {
+            const botao =
+                document.createElement("button");
 
-    const texto = pesquisa.value.toLowerCase();
 
-    botoesMusica.forEach(function(botao) {
+            botao.classList.add(
+                "musica-item"
+            );
 
-        const numero = Number(botao.dataset.musica);
 
-        const musicaEncontrada = musicas[numero];
+            botao.textContent =
+                "🎵 " +
+                musicaItem.titulo;
 
-        const nome =
-            musicaEncontrada.titulo.toLowerCase();
 
-        const artistaNome =
-            musicaEncontrada.artista.toLowerCase();
+            botao.addEventListener(
+                "click",
+                function() {
 
-        if (
-            nome.includes(texto) ||
-            artistaNome.includes(texto)
-        ) {
+                    musicaAtual =
+                        indice;
 
-            botao.style.display = "block";
 
-        } else {
+                    carregarMusica();
 
-            botao.style.display = "none";
+
+                    musica.play();
+
+                }
+            );
+
+
+            listaMusicas.appendChild(
+                botao
+            );
 
         }
+    );
 
-    });
+}
 
-});
+
+// ==========================================
+// PESQUISA
+// ==========================================
+
+pesquisa.addEventListener(
+    "input",
+    function() {
+
+
+        const texto =
+            pesquisa.value.toLowerCase();
+
+
+        const botoes =
+            document.querySelectorAll(
+                ".musica-item"
+            );
+
+
+        musicas.forEach(
+            function(musicaItem, indice) {
+
+
+                const nome =
+                    musicaItem.titulo
+                    .toLowerCase();
+
+
+                const nomeArtista =
+                    musicaItem.artista
+                    .toLowerCase();
+
+
+                if (
+                    nome.includes(texto) ||
+                    nomeArtista.includes(texto)
+                ) {
+
+                    botoes[indice]
+                        .style.display =
+                        "block";
+
+                }
+
+                else {
+
+                    botoes[indice]
+                        .style.display =
+                        "none";
+
+                }
+
+            }
+        );
+
+    }
+);
+
+
+// ==========================================
+// INICIAR O SITE
+// ==========================================
+
+criarPlaylist();
+
+carregarMusica();
+```

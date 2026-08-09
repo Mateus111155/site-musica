@@ -1,6 +1,6 @@
 ```javascript
 // ==========================================
-// LISTA DE MÚSICAS
+// MÚSICAS
 // ==========================================
 
 const musicas = [
@@ -9,28 +9,32 @@ const musicas = [
         titulo: "Música 1",
         artista: "Artista 1",
         arquivo: "musica1.mp3",
-        capa: "capa1.jpg"
+        capa: "capa1.jpg",
+        album: "Meu Primeiro Álbum"
     },
 
     {
         titulo: "Música 2",
         artista: "Artista 2",
         arquivo: "musica2.mp3",
-        capa: "capa2.jpg"
+        capa: "capa2.jpg",
+        album: "Meu Primeiro Álbum"
     },
 
     {
         titulo: "Música 3",
         artista: "Artista 3",
         arquivo: "musica3.mp3",
-        capa: "capa3.jpg"
+        capa: "capa3.jpg",
+        album: "Melhores Músicas"
     },
 
     {
         titulo: "Música 4",
         artista: "Artista 4",
         arquivo: "musica4.mp3",
-        capa: "capa4.jpg"
+        capa: "capa4.jpg",
+        album: "Melhores Músicas"
     }
 
 ];
@@ -50,16 +54,6 @@ const albuns = [
     {
         nome: "Melhores Músicas",
         capa: "capa2.jpg"
-    },
-
-    {
-        nome: "Músicas Favoritas",
-        capa: "capa3.jpg"
-    },
-
-    {
-        nome: "Minha Playlist",
-        capa: "capa4.jpg"
     }
 
 ];
@@ -87,7 +81,7 @@ let favoritos =
 
 
 // ==========================================
-// ELEMENTOS DO HTML
+// ELEMENTOS
 // ==========================================
 
 const musica =
@@ -145,28 +139,22 @@ const repetir =
 
 function carregarMusica() {
 
-    const musicaEscolhida =
+    const atual =
         musicas[musicaAtual];
 
-
     titulo.textContent =
-        musicaEscolhida.titulo;
-
+        atual.titulo;
 
     artista.textContent =
-        musicaEscolhida.artista;
-
+        atual.artista;
 
     capa.src =
-        musicaEscolhida.capa;
-
+        atual.capa;
 
     musica.src =
-        musicaEscolhida.arquivo;
-
+        atual.arquivo;
 
     progresso.value = 0;
-
 
     atualizarTempo();
 
@@ -204,7 +192,7 @@ pause.addEventListener(
 
 
 // ==========================================
-// PRÓXIMA MÚSICA
+// PRÓXIMA
 // ==========================================
 
 function proximaMusica() {
@@ -222,27 +210,11 @@ function proximaMusica() {
 
     if (aleatorioAtivo) {
 
-        let novaMusica;
-
-
-        do {
-
-            novaMusica =
-                Math.floor(
-                    Math.random() *
-                    musicas.length
-                );
-
-        }
-
-        while (
-            novaMusica === musicaAtual &&
-            musicas.length > 1
-        );
-
-
         musicaAtual =
-            novaMusica;
+            Math.floor(
+                Math.random() *
+                musicas.length
+            );
 
     }
 
@@ -250,9 +222,9 @@ function proximaMusica() {
 
         musicaAtual++;
 
-
         if (
-            musicaAtual >= musicas.length
+            musicaAtual >=
+            musicas.length
         ) {
 
             musicaAtual = 0;
@@ -271,16 +243,12 @@ function proximaMusica() {
 
 proxima.addEventListener(
     "click",
-    function() {
-
-        proximaMusica();
-
-    }
+    proximaMusica
 );
 
 
 // ==========================================
-// MÚSICA ANTERIOR
+// ANTERIOR
 // ==========================================
 
 anterior.addEventListener(
@@ -288,7 +256,6 @@ anterior.addEventListener(
     function() {
 
         musicaAtual--;
-
 
         if (
             musicaAtual < 0
@@ -299,7 +266,6 @@ anterior.addEventListener(
 
         }
 
-
         carregarMusica();
 
         musica.play();
@@ -309,16 +275,12 @@ anterior.addEventListener(
 
 
 // ==========================================
-// MÚSICA TERMINOU
+// TERMINOU
 // ==========================================
 
 musica.addEventListener(
     "ended",
-    function() {
-
-        proximaMusica();
-
-    }
+    proximaMusica
 );
 
 
@@ -332,7 +294,6 @@ aleatorio.addEventListener(
 
         aleatorioAtivo =
             !aleatorioAtivo;
-
 
         aleatorio.classList.toggle(
             "ativo",
@@ -353,7 +314,6 @@ repetir.addEventListener(
 
         repetirAtivo =
             !repetirAtivo;
-
 
         repetir.classList.toggle(
             "ativo",
@@ -384,7 +344,6 @@ musica.addEventListener(
 
         }
 
-
         atualizarTempo();
 
     }
@@ -392,7 +351,7 @@ musica.addEventListener(
 
 
 // ==========================================
-// ALTERAR POSIÇÃO DA MÚSICA
+// BARRA
 // ==========================================
 
 progresso.addEventListener(
@@ -431,25 +390,21 @@ volume.addEventListener(
 
 
 // ==========================================
-// ATUALIZAR TEMPO
+// TEMPO
 // ==========================================
 
 function atualizarTempo() {
 
-    const atual =
+    tempo.textContent =
         formatarTempo(
             musica.currentTime
-        );
-
-
-    const total =
+        )
+        +
+        " / "
+        +
         formatarTempo(
             musica.duration
         );
-
-
-    tempo.textContent =
-        atual + " / " + total;
 
 }
 
@@ -491,7 +446,7 @@ function formatarTempo(segundos) {
 
 
 // ==========================================
-// CRIAR PLAYLIST
+// PLAYLIST
 // ==========================================
 
 function criarPlaylist() {
@@ -500,7 +455,7 @@ function criarPlaylist() {
 
 
     musicas.forEach(
-        function(musicaItem, indice) {
+        function(item, indice) {
 
             const linha =
                 document.createElement(
@@ -526,11 +481,10 @@ function criarPlaylist() {
 
             botao.textContent =
                 "🎵 " +
-                musicaItem.titulo;
+                item.titulo;
 
 
-            botao.addEventListener(
-                "click",
+            botao.onclick =
                 function() {
 
                     musicaAtual =
@@ -540,8 +494,7 @@ function criarPlaylist() {
 
                     musica.play();
 
-                }
-            );
+                };
 
 
             const favorito =
@@ -561,8 +514,7 @@ function criarPlaylist() {
                     : "♡";
 
 
-            favorito.addEventListener(
-                "click",
+            favorito.onclick =
                 function(event) {
 
                     event.stopPropagation();
@@ -571,8 +523,7 @@ function criarPlaylist() {
                         indice
                     );
 
-                }
-            );
+                };
 
 
             linha.appendChild(
@@ -610,11 +561,8 @@ function adicionarFavorito(indice) {
 
         favoritos =
             favoritos.filter(
-                function(item) {
-
-                    return item !== indice;
-
-                }
+                item =>
+                    item !== indice
             );
 
     }
@@ -640,7 +588,7 @@ function adicionarFavorito(indice) {
 
 
 // ==========================================
-// CRIAR FAVORITOS
+// LISTA DE FAVORITOS
 // ==========================================
 
 function criarFavoritos() {
@@ -663,7 +611,7 @@ function criarFavoritos() {
     favoritos.forEach(
         function(indice) {
 
-            const musicaItem =
+            const item =
                 musicas[indice];
 
 
@@ -680,11 +628,10 @@ function criarFavoritos() {
 
             botao.textContent =
                 "❤️ " +
-                musicaItem.titulo;
+                item.titulo;
 
 
-            botao.addEventListener(
-                "click",
+            botao.onclick =
                 function() {
 
                     musicaAtual =
@@ -694,8 +641,7 @@ function criarFavoritos() {
 
                     musica.play();
 
-                }
-            );
+                };
 
 
             listaFavoritos.appendChild(
@@ -709,65 +655,7 @@ function criarFavoritos() {
 
 
 // ==========================================
-// PESQUISA
-// ==========================================
-
-pesquisa.addEventListener(
-    "input",
-    function() {
-
-        const texto =
-            pesquisa.value
-                .toLowerCase();
-
-
-        const linhas =
-            document.querySelectorAll(
-                "#lista-musicas .musica-linha"
-            );
-
-
-        musicas.forEach(
-            function(musicaItem, indice) {
-
-                const nome =
-                    musicaItem.titulo
-                        .toLowerCase();
-
-
-                const nomeArtista =
-                    musicaItem.artista
-                        .toLowerCase();
-
-
-                if (
-                    nome.includes(texto) ||
-                    nomeArtista.includes(texto)
-                ) {
-
-                    linhas[indice]
-                        .style.display =
-                        "flex";
-
-                }
-
-                else {
-
-                    linhas[indice]
-                        .style.display =
-                        "none";
-
-                }
-
-            }
-        );
-
-    }
-);
-
-
-// ==========================================
-// DESTACAR MÚSICA ATUAL
+// DESTAQUE
 // ==========================================
 
 function atualizarMusicaSelecionada() {
@@ -822,22 +710,67 @@ function atualizarMusicaSelecionada() {
 
 
 // ==========================================
+// PESQUISA
+// ==========================================
+
+pesquisa.addEventListener(
+    "input",
+    function() {
+
+        const texto =
+            pesquisa.value
+                .toLowerCase();
+
+
+        const linhas =
+            document.querySelectorAll(
+                "#lista-musicas .musica-linha"
+            );
+
+
+        musicas.forEach(
+            function(item, indice) {
+
+                const nome =
+                    item.titulo
+                        .toLowerCase();
+
+
+                const artistaNome =
+                    item.artista
+                        .toLowerCase();
+
+
+                linhas[indice].style.display =
+                    nome.includes(texto) ||
+                    artistaNome.includes(texto)
+                        ? "flex"
+                        : "none";
+
+            }
+        );
+
+    }
+);
+
+
+// ==========================================
 // CRIAR ÁLBUNS
 // ==========================================
 
 function criarAlbuns() {
 
-    const listaAlbuns =
+    const lista =
         document.getElementById(
             "lista-albuns"
         );
 
 
-    listaAlbuns.innerHTML = "";
+    lista.innerHTML = "";
 
 
     albuns.forEach(
-        function(album) {
+        function(album, indice) {
 
             const div =
                 document.createElement(
@@ -864,13 +797,13 @@ function criarAlbuns() {
                 album.nome;
 
 
-            const tituloAlbum =
+            const nome =
                 document.createElement(
                     "h3"
                 );
 
 
-            tituloAlbum.textContent =
+            nome.textContent =
                 album.nome;
 
 
@@ -880,11 +813,23 @@ function criarAlbuns() {
 
 
             div.appendChild(
-                tituloAlbum
+                nome
             );
 
 
-            listaAlbuns.appendChild(
+            // CLICAR NO ÁLBUM
+
+            div.onclick =
+                function() {
+
+                    abrirAlbum(
+                        indice
+                    );
+
+                };
+
+
+            lista.appendChild(
                 div
             );
 
@@ -892,6 +837,106 @@ function criarAlbuns() {
     );
 
 }
+
+
+// ==========================================
+// ABRIR ÁLBUM
+// ==========================================
+
+function abrirAlbum(indiceAlbum) {
+
+    const album =
+        albuns[indiceAlbum];
+
+
+    const nomeAlbum =
+        document.getElementById(
+            "nomeAlbum"
+        );
+
+
+    const lista =
+        document.getElementById(
+            "lista-album-musicas"
+        );
+
+
+    nomeAlbum.textContent =
+        "💿 " +
+        album.nome;
+
+
+    lista.innerHTML = "";
+
+
+    musicas.forEach(
+        function(item, indice) {
+
+            if (
+                item.album ===
+                album.nome
+            ) {
+
+                const botao =
+                    document.createElement(
+                        "button"
+                    );
+
+
+                botao.classList.add(
+                    "musica-item"
+                );
+
+
+                botao.textContent =
+                    "🎵 " +
+                    item.titulo;
+
+
+                botao.onclick =
+                    function() {
+
+                        musicaAtual =
+                            indice;
+
+                        carregarMusica();
+
+                        musica.play();
+
+                    };
+
+
+                lista.appendChild(
+                    botao
+                );
+
+            }
+
+        }
+    );
+
+
+    mostrarAlbumMusicas();
+
+}
+
+
+// ==========================================
+// VOLTAR PARA ÁLBUNS
+// ==========================================
+
+const voltarAlbuns =
+    document.getElementById(
+        "voltarAlbuns"
+    );
+
+
+voltarAlbuns.onclick =
+    function() {
+
+        mostrarAlbuns();
+
+    };
 
 
 // ==========================================
@@ -934,6 +979,12 @@ const paginaAlbuns =
     );
 
 
+const paginaAlbumMusicas =
+    document.getElementById(
+        "album-musicas"
+    );
+
+
 const paginaMusicas =
     document.getElementById(
         "musicas"
@@ -947,187 +998,121 @@ const paginaFavoritos =
 
 
 // ==========================================
-// MOSTRAR INÍCIO
+// ESCONDER TODAS AS PÁGINAS
+// ==========================================
+
+function esconderPaginas() {
+
+    inicio.style.display =
+        "none";
+
+    paginaAlbuns.style.display =
+        "none";
+
+    paginaAlbumMusicas.style.display =
+        "none";
+
+    paginaMusicas.style.display =
+        "none";
+
+    paginaFavoritos.style.display =
+        "none";
+
+}
+
+
+// ==========================================
+// INÍCIO
 // ==========================================
 
 function mostrarInicio() {
 
+    esconderPaginas();
+
     inicio.style.display =
         "block";
-
-    paginaAlbuns.style.display =
-        "none";
-
-    paginaMusicas.style.display =
-        "none";
-
-    paginaFavoritos.style.display =
-        "none";
-
-
-    menuInicio.classList.add(
-        "ativo"
-    );
-
-    menuAlbuns.classList.remove(
-        "ativo"
-    );
-
-    menuMusicas.classList.remove(
-        "ativo"
-    );
-
-    menuFavoritos.classList.remove(
-        "ativo"
-    );
 
 }
 
 
 // ==========================================
-// MOSTRAR ÁLBUNS
+// ÁLBUNS
 // ==========================================
 
 function mostrarAlbuns() {
 
-    inicio.style.display =
-        "none";
+    esconderPaginas();
 
     paginaAlbuns.style.display =
         "block";
-
-    paginaMusicas.style.display =
-        "none";
-
-    paginaFavoritos.style.display =
-        "none";
-
-
-    menuInicio.classList.remove(
-        "ativo"
-    );
-
-    menuAlbuns.classList.add(
-        "ativo"
-    );
-
-    menuMusicas.classList.remove(
-        "ativo"
-    );
-
-    menuFavoritos.classList.remove(
-        "ativo"
-    );
 
 }
 
 
 // ==========================================
-// MOSTRAR MÚSICAS
+// MÚSICAS DO ÁLBUM
+// ==========================================
+
+function mostrarAlbumMusicas() {
+
+    esconderPaginas();
+
+    paginaAlbumMusicas.style.display =
+        "block";
+
+}
+
+
+// ==========================================
+// MÚSICAS
 // ==========================================
 
 function mostrarMusicas() {
 
-    inicio.style.display =
-        "none";
-
-    paginaAlbuns.style.display =
-        "none";
+    esconderPaginas();
 
     paginaMusicas.style.display =
         "block";
-
-    paginaFavoritos.style.display =
-        "none";
-
-
-    menuInicio.classList.remove(
-        "ativo"
-    );
-
-    menuAlbuns.classList.remove(
-        "ativo"
-    );
-
-    menuMusicas.classList.add(
-        "ativo"
-    );
-
-    menuFavoritos.classList.remove(
-        "ativo"
-    );
 
 }
 
 
 // ==========================================
-// MOSTRAR FAVORITOS
+// FAVORITOS
 // ==========================================
 
 function mostrarFavoritos() {
 
-    inicio.style.display =
-        "none";
-
-    paginaAlbuns.style.display =
-        "none";
-
-    paginaMusicas.style.display =
-        "none";
+    esconderPaginas();
 
     paginaFavoritos.style.display =
         "block";
-
-
-    menuInicio.classList.remove(
-        "ativo"
-    );
-
-    menuAlbuns.classList.remove(
-        "ativo"
-    );
-
-    menuMusicas.classList.remove(
-        "ativo"
-    );
-
-    menuFavoritos.classList.add(
-        "ativo"
-    );
 
 }
 
 
 // ==========================================
-// CLIQUES DO MENU
+// EVENTOS DO MENU
 // ==========================================
 
-menuInicio.addEventListener(
-    "click",
-    mostrarInicio
-);
+menuInicio.onclick =
+    mostrarInicio;
 
 
-menuAlbuns.addEventListener(
-    "click",
-    mostrarAlbuns
-);
+menuAlbuns.onclick =
+    mostrarAlbuns;
 
 
-menuMusicas.addEventListener(
-    "click",
-    mostrarMusicas
-);
+menuMusicas.onclick =
+    mostrarMusicas;
 
 
-menuFavoritos.addEventListener(
-    "click",
-    mostrarFavoritos
-);
+menuFavoritos.onclick =
+    mostrarFavoritos;
 
 
 // ==========================================
-// INICIAR SITE
+// INICIAR
 // ==========================================
 
 criarPlaylist();

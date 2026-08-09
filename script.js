@@ -1,11 +1,18 @@
+const musica = document.getElementById("musica");
 
 const play = document.getElementById("play");
 const pause = document.getElementById("pause");
 
+
 play.addEventListener("click", function() {
-    alert("A música começou!");
+
+    musica.play();
+
 });
 
+
 pause.addEventListener("click", function() {
-    alert("A música foi pausada!");
+
+    musica.pause();
+
 });

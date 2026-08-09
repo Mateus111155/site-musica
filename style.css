@@ -1,1 +1,27 @@
 
+body {
+    background-color: #111;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+h1 {
+    margin-top: 50px;
+}
+
+.player {
+    background-color: #222;
+    width: 300px;
+    margin: 40px auto;
+    padding: 30px;
+    border-radius: 20px;
+}
+
+button {
+    padding: 12px 20px;
+    margin: 5px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}

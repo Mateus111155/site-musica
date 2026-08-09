@@ -1,126 +1,400 @@
+```css
+/* ==========================================
+   CONFIGURAÇÃO GERAL
+   ========================================== */
+
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
+
 
 body {
-    margin: 0;
-    background: #111;
-    color: white;
     font-family: Arial, sans-serif;
+
+    background: #111;
+
+    color: white;
+
+    min-height: 100vh;
+
+    padding: 30px;
 }
+
+
+/* ==========================================
+   CONTAINER
+   ========================================== */
 
 .container {
+
     width: 100%;
+
     max-width: 500px;
+
     margin: auto;
-    padding: 30px 20px;
+
 }
+
+
+/* ==========================================
+   TÍTULO
+   ========================================== */
 
 h1 {
+
     text-align: center;
-    margin-bottom: 30px;
+
+    margin-bottom: 25px;
+
 }
+
+
+/* ==========================================
+   PLAYER
+   ========================================== */
 
 .player {
-    background: #222;
+
+    background: #1e1e1e;
+
     padding: 25px;
+
     border-radius: 20px;
+
     text-align: center;
+
+    margin-bottom: 25px;
+
 }
+
+
+/* ==========================================
+   CAPA
+   ========================================== */
 
 #capa {
+
     width: 250px;
+
     height: 250px;
+
     object-fit: cover;
+
     border-radius: 15px;
-}
 
-#titulo {
-    margin-bottom: 5px;
-}
-
-#artista {
-    margin-top: 0;
-    color: #aaa;
-}
-
-.controles {
-    margin: 20px 0;
-}
-
-button {
-    border: none;
-    padding: 12px 18px;
-    margin: 5px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-button:hover {
-    transform: scale(1.05);
-}
-
-input[type="range"] {
-    width: 100%;
-    cursor: pointer;
-}
-
-.lista {
-    margin-top: 25px;
-    background: #222;
-    padding: 20px;
-    border-radius: 20px;
-}
-
-.lista h2 {
-    text-align: center;
-}
-
-.musica-item {
-    display: block;
-    width: 100%;
-    margin: 10px 0;
-}
-#pesquisa {
-    width: 100%;
-    padding: 12px;
     margin-bottom: 20px;
 
+}
+
+
+/* ==========================================
+   TÍTULO DA MÚSICA
+   ========================================== */
+
+#titulo {
+
+    font-size: 24px;
+
+    margin-bottom: 5px;
+
+}
+
+
+/* ==========================================
+   ARTISTA
+   ========================================== */
+
+#artista {
+
+    color: #aaa;
+
+    margin-bottom: 20px;
+
+}
+
+
+/* ==========================================
+   CONTROLES
+   ========================================== */
+
+.controles {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    margin-bottom: 20px;
+
+}
+
+
+.controles button {
+
     border: none;
+
+    background: #333;
+
+    color: white;
+
+    width: 50px;
+
+    height: 50px;
+
+    border-radius: 50%;
+
+    font-size: 20px;
+
+    cursor: pointer;
+
+}
+
+
+.controles button:hover {
+
+    transform: scale(1.1);
+
+}
+
+
+/* ==========================================
+   BARRAS
+   ========================================== */
+
+#progresso,
+#volume {
+
+    width: 100%;
+
+    cursor: pointer;
+
+}
+
+
+#progresso {
+
+    margin-bottom: 10px;
+
+}
+
+
+#tempo {
+
+    font-size: 14px;
+
+    color: #aaa;
+
+    margin-bottom: 15px;
+
+}
+
+
+/* ==========================================
+   VOLUME
+   ========================================== */
+
+.player label {
+
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #aaa;
+
+}
+
+
+/* ==========================================
+   PLAYLIST
+   ========================================== */
+
+.lista {
+
+    background: #1e1e1e;
+
+    padding: 20px;
+
+    border-radius: 20px;
+
+    margin-bottom: 25px;
+
+}
+
+
+.lista h2 {
+
+    margin-bottom: 15px;
+
+}
+
+
+/* ==========================================
+   PESQUISA
+   ========================================== */
+
+#pesquisa {
+
+    width: 100%;
+
+    padding: 13px;
+
+    border: none;
+
     border-radius: 10px;
+
+    margin-bottom: 15px;
 
     font-size: 16px;
 
     outline: none;
-}
-.musica-linha {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    margin: 10px 0;
+
 }
 
-.musica-linha .musica-item {
-    flex: 1;
-    margin: 0;
+
+/* ==========================================
+   LINHA DA MÚSICA
+   ========================================== */
+
+.musica-linha {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin-bottom: 8px;
+
 }
+
+
+/* ==========================================
+   BOTÃO DA MÚSICA
+   ========================================== */
+
+.musica-item {
+
+    flex: 1;
+
+    border: none;
+
+    background: #333;
+
+    color: white;
+
+    padding: 13px;
+
+    border-radius: 10px;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    font-size: 15px;
+
+}
+
+
+.musica-item:hover {
+
+    background: #444;
+
+}
+
+
+/* ==========================================
+   FAVORITO
+   ========================================== */
 
 .favorito {
+
     width: 50px;
-    margin: 0;
+
+    height: 45px;
+
+    border: none;
+
+    background: #333;
+
+    color: white;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
     font-size: 20px;
+
 }
+
+
+.favorito:hover {
+
+    transform: scale(1.05);
+
+}
+
+
+/* ==========================================
+   CAIXA DE FAVORITOS
+   ========================================== */
+
 .favoritos-box {
-    margin-top: 25px;
+
+    margin-top: 10px;
+
 }
+
 
 .favoritos-box p {
+
     text-align: center;
+
     color: #aaa;
+
+    padding: 10px;
+
 }
 
+
 .favoritos-box .musica-item {
+
     width: 100%;
-    margin: 8px 0;
+
+    margin-bottom: 8px;
+
 }
+
+
+/* ==========================================
+   CELULAR
+   ========================================== */
+
+@media (max-width: 600px) {
+
+    body {
+
+        padding: 15px;
+
+    }
+
+
+    #capa {
+
+        width: 200px;
+
+        height: 200px;
+
+    }
+
+
+    .player {
+
+        padding: 20px;
+
+    }
+
+}
+```

@@ -17,147 +17,207 @@
 
 <body>
 
-    <div class="container">
+
+    <!-- ======================================
+         CABEÇALHO
+         ====================================== -->
+
+    <header>
 
         <h1>🎵 Meu Player</h1>
 
 
-        <!-- PLAYER -->
+        <!-- MENU -->
 
-        <div class="player">
+        <nav>
 
-            <img
-                id="capa"
-                src="capa1.jpg"
-                alt="Capa da música"
-            >
+            <button id="menuInicio">
+                🏠 Início
+            </button>
 
-            <h2 id="titulo">
-                Música 1
-            </h2>
+            <button id="menuMusicas">
+                🎶 Músicas
+            </button>
 
-            <p id="artista">
-                Artista 1
-            </p>
+            <button id="menuFavoritos">
+                ❤️ Favoritos
+            </button>
+
+        </nav>
+
+    </header>
 
 
-            <audio id="musica"></audio>
+
+    <!-- ======================================
+         CONTEÚDO
+         ====================================== -->
+
+    <main>
 
 
-            <!-- CONTROLES -->
+        <!-- ==================================
+             INÍCIO
+             ================================== -->
 
-            <div class="controles">
+        <section id="inicio">
 
-                <button id="anterior" title="Anterior">
-                    ⏮️
-                </button>
+            <div class="player">
 
-                <button id="play" title="Play">
-                    ▶️
-                </button>
+                <img
+                    id="capa"
+                    src="capa1.jpg"
+                    alt="Capa da música"
+                >
 
-                <button id="pause" title="Pausar">
-                    ⏸️
-                </button>
 
-                <button id="proxima" title="Próxima">
-                    ⏭️
-                </button>
+                <h2 id="titulo">
+                    Música 1
+                </h2>
+
+
+                <p id="artista">
+                    Artista 1
+                </p>
+
+
+                <audio id="musica"></audio>
+
+
+                <!-- CONTROLES -->
+
+                <div class="controles">
+
+                    <button id="anterior">
+                        ⏮️
+                    </button>
+
+                    <button id="play">
+                        ▶️
+                    </button>
+
+                    <button id="pause">
+                        ⏸️
+                    </button>
+
+                    <button id="proxima">
+                        ⏭️
+                    </button>
+
+                </div>
+
+
+                <!-- MODOS -->
+
+                <div class="modos">
+
+                    <button id="aleatorio">
+                        🔀
+                    </button>
+
+                    <button id="repetir">
+                        🔁
+                    </button>
+
+                </div>
+
+
+                <!-- PROGRESSO -->
+
+                <input
+                    type="range"
+                    id="progresso"
+                    min="0"
+                    max="100"
+                    value="0"
+                >
+
+
+                <p id="tempo">
+                    0:00 / 0:00
+                </p>
+
+
+                <!-- VOLUME -->
+
+                <label for="volume">
+                    🔊 Volume
+                </label>
+
+
+                <input
+                    type="range"
+                    id="volume"
+                    min="0"
+                    max="1"
+                    step="0.01"
+                    value="1"
+                >
 
             </div>
 
+        </section>
 
-            <!-- MODOS -->
 
-            <div class="modos">
 
-                <button
-                    id="aleatorio"
-                    title="Modo aleatório"
+        <!-- ==================================
+             MÚSICAS
+             ================================== -->
+
+        <section
+            id="musicas"
+            class="pagina"
+        >
+
+            <div class="lista">
+
+                <h2>
+                    🎶 Todas as músicas
+                </h2>
+
+
+                <input
+                    type="text"
+                    id="pesquisa"
+                    placeholder="🔎 Procurar música ou artista..."
                 >
-                    🔀
-                </button>
 
-                <button
-                    id="repetir"
-                    title="Repetir música"
-                >
-                    🔁
-                </button>
+
+                <div id="lista-musicas"></div>
 
             </div>
 
-
-            <!-- PROGRESSO -->
-
-            <input
-                type="range"
-                id="progresso"
-                min="0"
-                max="100"
-                value="0"
-            >
+        </section>
 
 
-            <p id="tempo">
-                0:00 / 0:00
-            </p>
+
+        <!-- ==================================
+             FAVORITOS
+             ================================== -->
+
+        <section
+            id="favoritos"
+            class="pagina"
+        >
+
+            <div class="lista">
+
+                <h2>
+                    ❤️ Minhas Favoritas
+                </h2>
 
 
-            <!-- VOLUME -->
+                <div id="lista-favoritos"></div>
 
-            <label for="volume">
-                🔊 Volume
-            </label>
+            </div>
 
-            <input
-                type="range"
-                id="volume"
-                min="0"
-                max="1"
-                step="0.01"
-                value="1"
-            >
-
-        </div>
+        </section>
 
 
-        <!-- PLAYLIST -->
-
-        <div class="lista">
-
-            <h2>
-                🎶 Playlist
-            </h2>
+    </main>
 
 
-            <input
-                type="text"
-                id="pesquisa"
-                placeholder="🔎 Procurar música ou artista..."
-            >
-
-
-            <div id="lista-musicas"></div>
-
-        </div>
-
-
-        <!-- FAVORITOS -->
-
-        <div class="lista favoritos-box">
-
-            <h2>
-                ❤️ Minhas Favoritas
-            </h2>
-
-
-            <div id="lista-favoritos"></div>
-
-        </div>
-
-    </div>
-
+    <!-- JAVASCRIPT -->
 
     <script src="script.js"></script>
 

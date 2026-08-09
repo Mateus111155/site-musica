@@ -19,20 +19,12 @@
 
     <div class="container">
 
-        <!-- ================================= -->
-        <!-- TÍTULO -->
-        <!-- ================================= -->
-
         <h1>🎵 Meu Player</h1>
 
 
-        <!-- ================================= -->
         <!-- PLAYER -->
-        <!-- ================================= -->
 
         <div class="player">
-
-            <!-- CAPA -->
 
             <img
                 id="capa"
@@ -40,22 +32,14 @@
                 alt="Capa da música"
             >
 
-
-            <!-- TÍTULO DA MÚSICA -->
-
             <h2 id="titulo">
                 Música 1
             </h2>
-
-
-            <!-- ARTISTA -->
 
             <p id="artista">
                 Artista 1
             </p>
 
-
-            <!-- ÁUDIO -->
 
             <audio id="musica"></audio>
 
@@ -64,28 +48,47 @@
 
             <div class="controles">
 
-                <button id="anterior">
+                <button id="anterior" title="Anterior">
                     ⏮️
                 </button>
 
-                <button id="play">
+                <button id="play" title="Play">
                     ▶️
                 </button>
 
-                <button id="pause">
+                <button id="pause" title="Pausar">
                     ⏸️
                 </button>
 
-                <button id="proxima">
+                <button id="proxima" title="Próxima">
                     ⏭️
                 </button>
 
             </div>
 
 
-            <!-- ================================= -->
-            <!-- BARRA DE PROGRESSO -->
-            <!-- ================================= -->
+            <!-- MODOS -->
+
+            <div class="modos">
+
+                <button
+                    id="aleatorio"
+                    title="Modo aleatório"
+                >
+                    🔀
+                </button>
+
+                <button
+                    id="repetir"
+                    title="Repetir música"
+                >
+                    🔁
+                </button>
+
+            </div>
+
+
+            <!-- PROGRESSO -->
 
             <input
                 type="range"
@@ -96,21 +99,16 @@
             >
 
 
-            <!-- TEMPO -->
-
             <p id="tempo">
                 0:00 / 0:00
             </p>
 
 
-            <!-- ================================= -->
             <!-- VOLUME -->
-            <!-- ================================= -->
 
             <label for="volume">
                 🔊 Volume
             </label>
-
 
             <input
                 type="range"
@@ -124,9 +122,7 @@
         </div>
 
 
-        <!-- ================================= -->
         <!-- PLAYLIST -->
-        <!-- ================================= -->
 
         <div class="lista">
 
@@ -135,8 +131,6 @@
             </h2>
 
 
-            <!-- PESQUISA -->
-
             <input
                 type="text"
                 id="pesquisa"
@@ -144,19 +138,12 @@
             >
 
 
-            <!--
-                O JAVASCRIPT VAI CRIAR
-                AS MÚSICAS AQUI
-            -->
-
             <div id="lista-musicas"></div>
 
         </div>
 
 
-        <!-- ================================= -->
         <!-- FAVORITOS -->
-        <!-- ================================= -->
 
         <div class="lista favoritos-box">
 
@@ -165,21 +152,12 @@
             </h2>
 
 
-            <!--
-                O JAVASCRIPT VAI CRIAR
-                OS FAVORITOS AQUI
-            -->
-
             <div id="lista-favoritos"></div>
 
         </div>
 
     </div>
 
-
-    <!-- ================================= -->
-    <!-- JAVASCRIPT -->
-    <!-- ================================= -->
 
     <script src="script.js"></script>
 
